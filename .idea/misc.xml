@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/kkata/Documents/UP/BirthdayCake-master/app/src/main/res/layout/activity_main.xml" value="0.12364130434782608" />
+        <entry key="..\:/Users/kkata/Documents/UP/BirthdayCake-master/app/src/main/res/layout/activity_main.xml" value="0.264" />
       </map>
     </option>
   </component>
@@ -13,5 +13,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.264" />
+      </ProjectState>
+    </option>
   </component>
 </project>
