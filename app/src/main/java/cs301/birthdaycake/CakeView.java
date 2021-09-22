@@ -5,9 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.View;
 
-public class CakeView extends SurfaceView {
+public class CakeView extends SurfaceView implements View.OnTouchListener {
 
     /* These are the paints we'll use to draw the birthday cake below */
     private CakeModel object;
@@ -144,6 +146,11 @@ public class CakeView extends SurfaceView {
     }//onDraw
     public CakeModel getter(){
         return this.object;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
     }
 }//class CakeView
 
