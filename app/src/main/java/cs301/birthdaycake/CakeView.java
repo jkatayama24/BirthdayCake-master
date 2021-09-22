@@ -52,6 +52,7 @@ public class CakeView extends SurfaceView {
 
         //Setup our palette
         cakePaint.setColor(0xFFC755B5);  //violet-red
+        cakePaint.setColor(0xFF215F6C);
         cakePaint.setStyle(Paint.Style.FILL);
         frostingPaint.setColor(0xFFFFFACD);  //pale yellow
         frostingPaint.setStyle(Paint.Style.FILL);
