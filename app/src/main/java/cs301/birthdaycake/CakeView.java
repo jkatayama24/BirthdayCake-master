@@ -148,6 +148,10 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
         }
 
         // draw the balloon
+        if (this.object.wasTouched) {
+            canvas.drawOval(balloon.cLeft, balloon.cTop,
+                    balloon.cRight, balloon.cBottom, balloon.color);
+        }
 
         invalidate();
 
@@ -160,20 +164,22 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent motionEvent) {
         if(motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN)
         {
+            // set the was touched instance to true
+            object.wasTouched = true;
+
             // this is reporting the beginning of a touch event as the user touches down
-            float l = motionEvent.getX();
-            float r = motionEvent.getY();
+            float x = motionEvent.getX();
+            float y = motionEvent.getY();
 
-            // draw the new spot
-            Balloon onTouchBalloon = new Balloon(l, r);
+            // instantiate the new coordinates for drawing
+            balloon.cLeft = x;
+            balloon.cTop = x - ( balloon.radius ) / 2;
+            balloon.cRight = y;
+            balloon.cBottom = y - ( balloon.radius ) / 2;
 
-            // need to initialize a new array list to store all the spots to draw
-            //onTouchSpot.draw(canvas); // can't do this since we don't have canvas
-
-            // instead add the spots to the array
-            //theSpots.add(onTouchSpot); // once the spots are on the screen, they stay on the screen
             // need to invalidate after
             invalidate();
+
             // return true since handled event
             return true;
         }
