@@ -19,6 +19,8 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+    // add a new Balloon variable
+    private Balloon balloon;
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -68,6 +70,9 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
         wickPaint.setStyle(Paint.Style.FILL);
 
         setBackgroundColor(Color.WHITE);  //better than black default
+
+        // add a new call to constructor for the balloon
+        this.balloon = new Balloon(100,100);
 
     }
 
@@ -141,6 +146,9 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
                 drawCandle(canvas, cakeLeft + candleDif*cakeWidth - candleWidth/2,cakeTop);
             }
         }
+
+        // draw the balloon
+
         invalidate();
 
     }//onDraw
@@ -149,7 +157,26 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
+    public boolean onTouch(View v, MotionEvent motionEvent) {
+        if(motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN)
+        {
+            // this is reporting the beginning of a touch event as the user touches down
+            float l = motionEvent.getX();
+            float r = motionEvent.getY();
+
+            // draw the new spot
+            Balloon onTouchBalloon = new Balloon(l, r);
+
+            // need to initialize a new array list to store all the spots to draw
+            //onTouchSpot.draw(canvas); // can't do this since we don't have canvas
+
+            // instead add the spots to the array
+            //theSpots.add(onTouchSpot); // once the spots are on the screen, they stay on the screen
+            // need to invalidate after
+            invalidate();
+            // return true since handled event
+            return true;
+        }
         return false;
     }
 }//class CakeView
