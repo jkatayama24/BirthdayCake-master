@@ -9,7 +9,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 
-public class CakeView extends SurfaceView implements View.OnTouchListener {
+public class CakeView extends SurfaceView {
 
     /* These are the paints we'll use to draw the birthday cake below */
     private CakeModel object;
@@ -148,7 +148,7 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
         }
 
         // draw the balloon
-        if (this.object.wasTouched) {
+        if (this.balloon.wasTouched) {
             canvas.drawOval(balloon.cLeft, balloon.cTop,
                     balloon.cRight, balloon.cBottom, balloon.color);
         }
@@ -158,32 +158,6 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
     }//onDraw
     public CakeModel getter(){
         return this.object;
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent motionEvent) {
-        if(motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN)
-        {
-            // set the was touched instance to true
-            object.wasTouched = true;
-
-            // this is reporting the beginning of a touch event as the user touches down
-            float x = motionEvent.getX();
-            float y = motionEvent.getY();
-
-            // instantiate the new coordinates for drawing
-            balloon.cLeft = x;
-            balloon.cTop = x - ( balloon.radius ) / 2;
-            balloon.cRight = y;
-            balloon.cBottom = y - ( balloon.radius ) / 2;
-
-            // need to invalidate after
-            invalidate();
-
-            // return true since handled event
-            return true;
-        }
-        return false;
     }
 }//class CakeView
 

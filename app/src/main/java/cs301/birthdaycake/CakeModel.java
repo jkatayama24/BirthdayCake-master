@@ -5,5 +5,4 @@ public class CakeModel {
     public int numberCandles = 2;
     public boolean frosting = true;
     public boolean candles = true;
-    public boolean wasTouched = false;
 }
