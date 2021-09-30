@@ -36,9 +36,10 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
     public static final float wickWidth = 6.0f;
     public static final float outerFlameRadius = 30.0f;
     public static final float innerFlameRadius = 15.0f;
-
-
-
+    float x;
+    float y;
+    private Paint redPaint;
+    private boolean touch;
 
 
     /**
@@ -66,6 +67,10 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        redPaint = new Paint();
+        redPaint.setARGB(255,255,0,0);
+        redPaint.setTextSize(60);
+        touch = false;
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
@@ -79,7 +84,7 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
         canvas.drawRect(left, bottom - candleHeight, left + candleWidth, bottom, candlePaint);
 
         //draw the outer flame
-        if(this.object.isLit) {
+        if (this.object.isLit) {
             float flameCenterX = left + candleWidth / 2;
             float flameCenterY = bottom - wickHeight - candleHeight - outerFlameRadius / 3;
             canvas.drawCircle(flameCenterX, flameCenterY, outerFlameRadius, outerFlamePaint);
@@ -88,7 +93,7 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
             flameCenterY += outerFlameRadius / 3;
             canvas.drawCircle(flameCenterX, flameCenterY, innerFlameRadius, innerFlamePaint);
         }
-        if(this.object.candles) {
+        if (this.object.candles) {
             //draw the wick
             float wickLeft = left + candleWidth / 2 - wickWidth / 2;
             float wickTop = bottom - wickHeight - candleHeight;
@@ -97,19 +102,17 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
         invalidate();
 
 
-
     }
 
     /**
      * onDraw is like "paint" in a regular Java program.  While a Canvas is
      * conceptually similar to a Graphics in javax.swing, the implementation has
      * many subtle differences.  Show care and read the documentation.
-     *
+     * <p>
      * This method will draw a birthday cake
      */
     @Override
-    public void onDraw(Canvas canvas)
-    {
+    public void onDraw(Canvas canvas) {
         //top and bottom are used to keep a running tally as we progress down the cake layers
         float top = cakeTop;
         float bottom = cakeTop + frostHeight;
@@ -133,23 +136,36 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
         canvas.drawRect(cakeLeft, top, cakeLeft + cakeWidth, bottom, cakePaint);
 
         //Now a candle in the center
-        if(this.object.candles) {
+        if (this.object.candles) {
             //drawCandle(canvas, cakeLeft + cakeWidth / 3 - candleWidth / 2, cakeTop);
             //drawCandle(canvas, cakeLeft + 2 * cakeWidth / 3 - candleWidth / 2, cakeTop);
-            for(int i = 1; i < object.numberCandles +1;i++){
-                float candleDif = (float) i/(object.numberCandles + 1);
-                drawCandle(canvas, cakeLeft + candleDif*cakeWidth - candleWidth/2,cakeTop);
+            for (int i = 1; i < object.numberCandles + 1; i++) {
+                float candleDif = (float) i / (object.numberCandles + 1);
+                drawCandle(canvas, cakeLeft + candleDif * cakeWidth - candleWidth / 2, cakeTop);
             }
         }
         invalidate();
+            if(touch) {
+                String corrd = String.format("[%s, %s]", x, y);
+                canvas.drawText(corrd, 5, 1200, redPaint);
+            }
+
 
     }//onDraw
-    public CakeModel getter(){
+
+    public CakeModel getter() {
         return this.object;
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+            x = event.getX();
+            y = event.getY();
+            invalidate();
+            touch = true;
+            return true;
+        }
         return false;
     }
 }//class CakeView
