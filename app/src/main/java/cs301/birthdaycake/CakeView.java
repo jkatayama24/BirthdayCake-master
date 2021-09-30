@@ -36,7 +36,10 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
     public static final float wickWidth = 6.0f;
     public static final float outerFlameRadius = 30.0f;
     public static final float innerFlameRadius = 15.0f;
-
+    public float x;
+    public float y;
+    boolean clicked;
+    public Paint red;
 
 
 
@@ -68,6 +71,8 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
         wickPaint.setStyle(Paint.Style.FILL);
 
         setBackgroundColor(Color.WHITE);  //better than black default
+        clicked = false;
+        red = new Paint(Color.red(255));
 
     }
 
@@ -95,8 +100,6 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
             canvas.drawRect(wickLeft, wickTop, wickLeft + wickWidth, wickTop + wickHeight, wickPaint);
         }
         invalidate();
-
-
 
     }
 
@@ -142,6 +145,14 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
             }
         }
         invalidate();
+        if(clicked) {
+            String string = String.format("[%s, %s]",x,y);
+            red.setTextSize(60);
+            red.setColor(Color.RED);
+            canvas.drawText(string, 20, 1200, red);
+
+        }
+
 
     }//onDraw
     public CakeModel getter(){
@@ -150,6 +161,12 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        if(event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+            x = event.getX();
+            y = event.getY();
+            clicked = true;
+            return true;
+        }
         return false;
     }
 }//class CakeView
