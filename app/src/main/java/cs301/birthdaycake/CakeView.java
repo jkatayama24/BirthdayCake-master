@@ -10,8 +10,9 @@ import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 
-public class CakeView extends SurfaceView implements View.OnTouchListener {
+public class CakeView extends SurfaceView  {
 
+    //implements View.OnTouchListener
     /* These are the paints we'll use to draw the birthday cake below */
     private CakeModel object;
     Paint cakePaint = new Paint();
@@ -157,6 +158,15 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
             }
         }
 
+        if (this.object.x != -1 && this.object.y != -1){
+            String string = String.format("[%s, %s]",object.x,object.y);
+            red.setTextSize(60);
+            red.setColor(Color.RED);
+            canvas.drawText(string, 20, 1200, red);
+
+        }
+
+
         Paint g = new Paint();
         Paint r = new Paint();
         g.setColor(Color.GREEN);
@@ -177,30 +187,22 @@ public class CakeView extends SurfaceView implements View.OnTouchListener {
 
 
         //invalidate();
-        invalidate();
-        if(clicked) {
-            String string = String.format("[%s, %s]",x,y);
-            red.setTextSize(60);
-            red.setColor(Color.RED);
-            canvas.drawText(string, 20, 1200, red);
-
-        }
-
+        //invalidate();
 
     }//onDraw
     public CakeModel getter(){
         return this.object;
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        if(event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-            x = event.getX();
-            y = event.getY();
-            clicked = true;
-            return true;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean onTouch(View v, MotionEvent event) {
+    //    if(event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+  //          x = event.getX();
+    //        y = event.getY();
+   //         clicked = true;
+    //        return true;
+  //      }
+   //     return false;
+   // }
 }//class CakeView
 

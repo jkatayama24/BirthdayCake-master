@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         t.setOnTouchListener(controller);
         CakeView cakeView = (CakeView) findViewById(R.id.cakeview);
-        cakeView.setOnTouchListener(t);
+        //cakeView.setOnTouchListener(t);
     }
     public void goodbye(View button){
         Log.i("button","Goodbye");

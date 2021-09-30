@@ -65,10 +65,11 @@ public class CakeController implements View.OnClickListener,
             //this.object.wasTouched = true;
             cakemodel.x = event.getX();
             cakemodel.y = event.getY();
-            float bX = event.getX();
-            float bY = event.getY();
-            balloon.cLeft = bX;
-            balloon.cTop = bY;
+           // float bX = event.getX();
+           // float bY = event.getY();
+            //balloon.cLeft = bX;
+            //balloon.cTop = bY;
+
 
             Log.d("click", "onTouch working");
 
