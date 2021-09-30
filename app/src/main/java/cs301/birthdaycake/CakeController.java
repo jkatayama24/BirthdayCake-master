@@ -3,19 +3,26 @@ package cs301.birthdaycake;
 import android.support.v4.view.TintableBackgroundView;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
 public class CakeController implements View.OnClickListener,
-        CompoundButton.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener, View.OnTouchListener {
+        CompoundButton.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener,
+        View.OnTouchListener {
     private CakeView cakeview;
     private CakeModel cakemodel;
+   // add a new Balloon variable
+    private Balloon balloon;
 
 
     public CakeController(CakeView object){
         cakeview = object;
         cakemodel = cakeview.getter();
+        // add a new call to constructor for the balloon
+        this.balloon = new Balloon(100,100);
+
     }
 
     public void onClick(View view) {
@@ -50,7 +57,6 @@ public class CakeController implements View.OnClickListener,
     public void onStopTrackingTouch(SeekBar seekBar) {
 
     }
-
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if (event.getActionMasked() == MotionEvent.ACTION_DOWN)
@@ -59,12 +65,13 @@ public class CakeController implements View.OnClickListener,
             //this.object.wasTouched = true;
             cakemodel.x = event.getX();
             cakemodel.y = event.getY();
+            float bX = event.getX();
+            float bY = event.getY();
+            balloon.cLeft = bX;
+            balloon.cTop = bY;
 
             Log.d("click", "onTouch working");
 
-            //want to draw a cb in this location
-            //this.cb = new CheckerBoard(x,y);
-            //this.cakemodel.wasTouched = true;
             cakemodel.wasTouched = true;
             cakeview.invalidate();
             v.invalidate();
@@ -74,4 +81,5 @@ public class CakeController implements View.OnClickListener,
 
         return false;
     }
+
 }
