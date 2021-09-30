@@ -5,4 +5,7 @@ public class CakeModel {
     public int numberCandles = 2;
     public boolean frosting = true;
     public boolean candles = true;
+    public boolean wasTouched = false;
+    float x = -1;
+    float y = -1;
 }
